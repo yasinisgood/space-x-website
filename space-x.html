@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceX Clone</title>
+  <style>
+    /* Reset and Body Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: black;
+      overflow-x: hidden;
+      scroll-behavior: smooth; /* Enables smooth scrolling */
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      position: relative;
+    }
+
+    /* Cool underline effect for nav links */
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: white;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1507433953110-236d2f0d2a4d?fit=crop&w=1350&q=80') no-repeat center center/cover;
+    }
+
+    .hero .rocket img {
+      height: 200px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .tagline {
+      font-size: 36px;
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 100px 20px;
+      text-align: center;
+      background: #111;
+      border-top: 1px solid #444;
+      min-height: 100vh;
+      opacity: 0; /* Initially hidden */
+      transition: opacity 0.8s ease; /* Smooth fade-in effect */
+    }
+
+    .section.active {
+      opacity: 1; /* Section becomes visible */
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">SpaceX</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#missions">Missions</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="rocket">
+      <img src="https://cdn-icons-png.flaticon.com/512/2924/2924865.png" alt="Rocket">
+    </div>
+    <h2 class="tagline">Making Life Multi-Planetary</h2>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About SpaceX</h2>
+    <p>SpaceX designs, develops, and launches the world's most advanced rockets and spacecraft.</p>
+  </section>
+
+  <section id="missions" class="section">
+    <h2>Our Missions</h2>
+    <p>From reusability to interplanetary exploration, we aim for the stars.</p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Reach out to explore the cosmos together.</p>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    // GSAP Animations
+    gsap.from(".rocket img", {
+      y: 200,
+      duration: 2,
+      opacity: 0,
+      ease: "power2.out",
+    });
+
+    gsap.from(".tagline", {
+      y: 50,
+      duration: 1.5,
+      opacity: 0,
+      delay: 1,
+    });
+
+    // Fade-in effect for sections
+    const sections = document.querySelectorAll(".section");
+    sections.forEach(section => {
+      gsap.to(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleClass: "active",
+        },
+        duration: 1,
+      });
+    });
+
+    // Smooth scrolling to sections
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
